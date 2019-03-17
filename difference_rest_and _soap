@@ -1,0 +1,94 @@
+Though both SOAP and RESTful web services allow a client to query the server for some information, but the way they are implemented and used is quite different. The main difference between SOAP and REST is that former provides a standard of communication between client, server and other parties and has restricted a set of rules and format, while REST leverages the ubiquity of HTTP protocol, in both client and servers, to allow them to communicate with each other regardless of their implementation. In short, getting data from a RESTful web service requires less headache then getting data from a SOAP web service. Since everybody is familiar with HTTP requests like GET or POST, it's easy to understand and correlated how RESTful web services are working and which URL of REST web service provides what kind of information. In SOAP, you need to understand lengthy WSDL document to find out right methods and the right way to call them.
+
+For example, suppose you want to retrieve today's weather for a particular city from a server which is providing weather information, your RESTful URL will look something like http://weatherdata.org/data/weather/uk/london, which is very similar to HTTP request like http://weatherdata.org/data/weather?q=uk,London.
+
+On the other hand, in order to get the same data using SOAP, you need to create an XML message with header and body and send it http://www.webservicex.net/globalweather.asmx?op=GetWeather. In short, RESTfull web services are much simpler, flexible and expressive than SOAP web services in Java. See RESTful Web Services by Leonard Richardson and Sam Ruby for an easy introduction of REST as well.
+
+SOAP vs REST
+
+
+
+Apart from the obvious, let's find out some more differences between SOAP vs RESTFul web services.
+
+
+
+Difference between REST and SOAP in Java
+Here are some fundamental differences between REST, RESTful and SOAP Web Services, which will help you not only to understand these two key technologies better but also to answer some tricky Java web services questions based upon these two technologies :
+
+
+Short Form
+REST stands for REpresntational State Transfer (REST) while SOAP Stands for Simple Object Access Protocol (SOAP).
+
+
+Architecture style vs Protocol
+REST is an architectural style, on which RESTFul web services are built while SOAP is a standard devised to streamline communication between client and server in terms of format, structure and method.
+
+
+Use of HTTP Protocol
+REST takes full advantage of HTTP protocol, including methods e.g. GET, POST, PUT, and DELETE to represent action e.g. from an application which provides data related to books, GET request can be used to retrieve books, POST can be used to upload data of a new book, and DELETE can be used to remove a book from library. On the other hand, SOAP uses XML messages to communicate with the server.
+
+
+Supported Format
+RESTful web service can return the response in various format e.g. JSON, XML and HTML, while by using SOAP web service you tie your response with XML because actual response is bundled inside a SOAP message which is always in XML format.
+
+
+Speed
+Processing a RESTful web service request is much faster than processing a SOAP message because you need to less parsing. Because of this reason RESTful, web services are faster than SOAP web service.
+
+
+Bandwidth
+SOAP messages consume more bandwidth than RESTFul messages for the same type of operation because XML is more verbose than JSON, standard way to send RESTFul messages and SOAP has an additional header for every message while RESTFul services utilize HTTP header.
+
+
+Transport Independence
+Since SOAP messages are wrapped in a SOAP envelope it can be sent over to any transport mechanism e.g. TCP, FTP, SMTP or any other protocol. On the other hand, RESTful Web services are heavily dependent upon HTTP protocol. They used HTTP commands their operation and depends upon on HTTP for transmitting content to the server. Though in a real world, SOAP is mostly over HTTP so this advantage of transport independence is not really utilized.
+
+
+Resource Identification
+RESTful web services utilize URL to identify the desired resources to be accessed while SOAP uses XML messages to identify the desired web procedure or resource to be invoked.
+
+
+Security
+Security in RESTful web service can be implemented using standard and traditional solutions for authorized access to certain web resources. While to implement security in SOAP based web services you need additional infrastructure in the web to enable message or transport level security concerns.
+
+
+Caching
+RESTful web service takes full advantage of the web caching mechanism because they are basically URL based. On the other hand, SOAP web services totally ignore web caching mechanism.
+
+
+Approach
+In REST based web-services every entity is centered around resources, while in the case of SOAP web service, every entity is centered around interfaces and messages.
+
+
+An Example
+In the first paragraph, we have seen one example of requesting same web service using both SOAP and RESTFul style, you can see that REST web service is easy to understand, can be cached and required little effort to understand as compared to SOAP.
+
+
+
+Summary - RESTful vs SOAP Web Service
+Here is a nice summary of key differences between REST and SOAP style web services :
+
+
+
+Some Technical details about SOAP Web Services
+1) SOAP stands for Simple Object Access Protocol but nothing is so simple about it :)
+
+2) It's only possible to send XML messages to the server using SOAP web service because your request is embedded inside SOAP envelope which is in XML format, on the other hand, RESTful web services allow you to send a request in various formats e.g. JSON and flexible enough to send JSON responses.
+
+
+
+Why REST is better than SOAP?
+Now that you know some differences between REST and SOAP web services, let's summarize our reasons of why REST is better choice for modern day web service requirement :
+
+1. REST can be consumed by any client  e.g. Java, C++, Python client and even a web browser with Ajax and JavaScript.
+
+2. REST is lightweight as compared to SOAP, it doesn't require CPU consuming XML parsing and it also consumes less bandwidth because unlike SOAP, REST doesn't require a SOAP header for every message.
+
+3. SOAP is an old technology, all modern technical giant are using REST e.g. Google, Twitter, and Flickr.
+
+4. REST is easy to learn, its just nouns and verbs. If you already know HTTP methods then its even easier.
+
+5. Java has excellent support for RESTFul web services, well it also has good support for SOAP web services but you have lots of choices here e.g. Jersey, RESTLet etc.
+
+
+

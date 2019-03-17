@@ -1,0 +1,105 @@
+Connection Pooling with Hibernate 4
+
+We have arrived at a state with Hibernate 4 where we can change the database behind the system to go for production usage (so H2 databases are out of the question).
+
+Now it is time to look at connection pooling, because the default connection pooling mechanism of Hibernate is rudimentary and is provided only for development and testing usage.
+
+For the best performance and stability it is required to use a third-party tool. And there are some on the market and most of them are free and you can use them with ease along with Hibernate.
+C3P0
+
+Just like the golden translation and protocol robot of Star Wars, the mainly used connection pool provider is called c3p0.
+
+C3P0 is an open source connection pool which has a Hibernate package which you can add as dependency to your project and you are ready to configure the pool:
+
+    <dependency>
+     <groupId>org.hibernate</groupId>
+     <artifactId>hibernate-c3p0</artifactId>
+     <version>4.3.10.Final</version>
+     </dependency>
+
+The most important configuration properties of the c3p0 connection pool are the following:
+
+    c3p0.min_size: Minimum number of JDBC connections in the pool. Hibernate default: 1
+    c3p0.max_size: Maximum number of JDBC connections in the pool. Hibernate default: 100
+    c3p0.timeout: When an idle connection is removed from the pool (in second). Hibernate default: 0, never expire.
+    c3p0.max_statements: Number of prepared statements will be cached. Increase performance. Hibernate default: 0 , caching is disable.
+    c3p0.idle_test_period – idle time in seconds before a connection is automatically validated. Hibernate default: 0
+
+Configuration of C3P0
+
+To configure C3P0 with your application you need the following properties set. In this case let’s see the already known XML-based configuration in hibernate.cfg.xml:
+
+    <property name="hibernate.connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>
+     <property name="hibernate.c3p0.min_size">1</property>
+     <property name="hibernate.c3p0.max_size">19</property>
+     <property name="hibernate.c3p0.timeout">120</property>
+     <property name="hibernate.c3p0.max_statements">10</property>
+
+The first line with the connection provider is optional, you do not have to enter it, Hibernate will know that you are using C3P0. This is because the location (package structure) can change between Hibernate versions and it would be a pain in the neck to get an error every time you update to a newer version where the connection provider class is located at a different place.
+
+If you look carefully in your log or console output when you start the server you should see that C3P0 is being configured:
+
+    org.hibernate.c3p0.internal.C3P0ConnectionProvider configure
+
+Proxool
+
+Proxool is an alternative connection pool to C3P0 however it requires more configuration so I personally favor C3P0.
+
+It is not enough to have the dependency and your properties set, you need an extra XML file which contains the configuration information for Proxool.
+
+The dependency is almost the same as for C3P0:
+
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-proxool</artifactId>
+        <version>4.3.10.Final</version>
+     </dependency>
+
+Configuration of Proxool
+
+As I mentioned previously, it is not enough to configure Proxool in the hibernate.cfg.xml file, you need a separate XML file too:
+
+    <property name="hibernate.connection.provider_class">org.hibernate.connection.ProxoolConnectionProvider</property>
+     <property name="hibernate.proxool.pool_alias">proxool</property>
+     <property name="hibernate.proxool.xml">proxool.xml</property>
+
+As with C3P0 the first line, the hibernate.connection.provider_class is optional.
+
+The XML file is mentioned in the hibernate.proxool.xml property.
+
+The proxool.xml contains the following:
+
+    <proxool-config>
+        <proxool>
+            <alias>proxool</alias>
+            <driver-url>jdbc:h2:file:./example;DB_CLOSE_DELAY=-1;MVCC=TRUE</driver-url>
+            <driver-class>org.h2.Driver</driver-class>
+            <driver-properties>
+                <property name="user" value="sa"></property>
+                <property name="password" value=""></property>
+            </driver-properties>
+            <minimum-connection-count>10</minimum-connection-count>
+            <maximum-connection-count>20</maximum-connection-count>
+        </proxool>
+     </proxool-config>
+
+As you can see, you have to provide the database connection in Proxool. This is mandatory. However because of this you can leave the connection configuration from the hibernate.cfg.xml file.
+
+One drawback exists with Proxool: you have to define the dialect to use. With C3P0 and the default Hibernate configuration you don’t need to set the dialect to use but Proxool needs this information.
+
+If everything is set-up you can see the following entry in your log or on the console when you start the application:
+
+org.hibernate.proxool.internal.ProxoolConnectionProvider configure
+Generally about the configuration
+
+Hibernate uses its magic to identify which connection pool provider to use — based on the properties you configure. However you can define the connection provider with the hibernate.connection.provider_class property.
+
+If you do not configure a connection pool, the default is used. It is visible in the log or console output when you start the application:
+
+    org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+
+Conclusion
+
+There are some connection pool providers out there which you can easily bind together with Hibernate to give you a good database connection experience.
+
+Configuring those providers is easy as most of them have their Hibernate integration package to import as a dependency to your project and get everything running.

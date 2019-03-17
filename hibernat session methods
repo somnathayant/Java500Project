@@ -1,0 +1,3 @@
+Hibernate Session save:--
+
+As the method name suggests, hibernate save() can be used to save entity to database. We can invoke this method outside a transaction, that’s why I don’t like this method to save data. If we use this without transaction and we have cascading between entities, then only the primary entity gets saved unless we flush the session.

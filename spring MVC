@@ -1,0 +1,538 @@
+Following Spring interview questions are for freshers and experienced users
+
+1)  What is a spring?
+
+Spring is set to be a framework which helps Java programmer for development of code and it provides IOC container, Dependency Injector, MVC flow and many other APIs for the java programmer.
+
+2) What are Advices in Spring?
+
+It is the execution of an aspect. Advice is like making your application learn a new trick. They are usually introduced at joinpoints.
+
+3) What is the default scope of bean in Spring framework?
+
+The default scope of bean is Singleton for Spring framework.
+
+4) Name the types of transaction management that are supported by Spring?
+
+Transaction management supported by Spring are :
+
+     Declarative transaction management.
+     Programmatic transaction management.
+
+5) Is Singleton beans are thread safe in Spring Framework?
+
+No, singleton beans are not thread-safe in Spring framework.
+
+6) What are the benefits of Spring Framework?
+
+Following are the benefits of Spring framework:
+
+    Extensive usage of Components
+    Reusability
+    Decoupling
+    Reduces coding effort by using pattern implementations such as singleton, factory, service locator etc.
+    Removal of leaking connections
+    Declarative transaction management
+    Easy to integrate with third party tools and technologies.
+
+7) What is Bean Factory?
+
+Bean Factory is core of the spring framework and, it is a Lightweight container which loads bean definitions and manages your beans.  Beans are configured using XML file and manage singleton defined bean. It is also responsible for life cycle methods and injects dependencies. It also removes adhoc singletons and factories.
+
+8) Define Bean Wiring?
+
+Bean wiring is the creation of associations between application components that are between the beans in a particular spring container.
+
+9) What is called Spring MVC?
+
+A Spring MVC is a single shared controller instance and it is used to handle request type controllers, interceptors which run in the IoC container. It also allows multiple Dispatcher Servlets which can share application context interface but not class based interface.
+
+10) Why Spring framework is needed?
+
+Spring framework is needed because it is –
+
+    Very Light Weight Container
+    Framework
+    IOC
+    AOP
+
+11) Name the various modules used in spring framework?
+
+    AOP module (Aspect Oriented Programming)
+    JDBC abstraction and DAO module
+    The Core container module
+    MVC framework module
+    Application context module
+    O/R mapping integration module (Object/Relational)
+    Web module
+
+12) Explain the RowCallbackHandler in Spring?
+
+The RowCallbackHandler is called for each row in ResultSet and is used to read values from the ResultSet.
+
+13) Define Application context module?
+
+This is a very important module and supplies various necessary services like EJB integration, remoting, JNDI access and scheduling. It transforms spring into a framework. It also broadens the idea of BeanFactory by application of lifecycle events, providing support for internationalization messages and validation.
+
+14) Write about AOP module?
+
+AOP module is utilized for creating aspects for Spring applications. It also enables support for metadata programming in Spring.
+
+15) What is a BeanFactory Interface?
+
+Bean factory interface is used to provide configuration framework for object creation and basic functionality around object management.
+
+16) State the differences between ApplicationContext and BeanFactory in spring?
+
+    ApplicationContext allows more than one config files to exist while BeanFactory only permits one.
+    ApplicationContext can print events to beans registered as listeners. This feature is not supported by BeanFactory.
+    ApplicationContext also provides support for application of lifecycle events, internationalization messages and validation and also provides services like EJB integration, remoting, JNDI access and scheduling. These features too are not supported by Bean Factory.
+
+17) What is Auto Wiring?
+
+Autowiring is used to build relationships between the collaborating beans. Spring container can automatically resolve collaborators for beans.
+
+18) What are the different Modes of Autowiring?
+
+Autowiring has five different modes:
+
+    no: no autowire
+    byName : Autowiring that can be done by property name
+    byType : property type as autowired
+    constructor: It is similar to byType and it is property is in constructor
+    autodetect :  Spring is allowed to select autowiring from byType or constructor
+
+19) How to start using spring?
+
+Following steps needs to be done to start with the Spring:
+
+    Download Spring and its dependent file from spring’s site.
+    Create application context xml to define beans and its dependencies
+    Integrate application context xml with web.xml
+    Deploy and Run the application
+
+20) What are the methods of bean life cycle?
+
+There are two important methods of Bean life cycle:
+
+    Setup – called when bean is loaded into container
+    Teardown – called when bean is unloaded into container
+
+21) What are the different types of events of Listeners?
+
+Following are the different types of events of listeners:
+
+    ContextClosedEvent – This event is called when the context is closed.
+    ContextRefreshedEvent – This event is called when context is initialized or refreshed
+    RequestHandledEvent – This event is called when the web context handles request
+
+22) Differentiate between singleton and prototype bean?
+
+Singleton means only one bean is defined per object instance while Prototype means one definition to more than one object instances in Spring.
+
+23) What are the types of Dependency Injection?
+
+Two types of dependency injection are supported by spring framework:
+
+    Setter Injection
+    Constructor Injection
+
+24) Write about Core container module?
+
+Core container module is responsible for the basic functionality of the spring framework. The whole Spring framework is built with this module as a base.
+
+25) What is AOP module?
+
+This AOP module is used for spring enabled application. Support has been provided AOP alliance to ensure the interoperability between spring and other AOP frameworks.
+
+It instructs spring to add annotations to the source code and tell how to apply aspects.
+
+26) What is AOP Alliance?
+
+AOP alliance is an open-source project which is aimed at promoting adoption of AOP. The AOP alliance’s goal is to define a common set of components and interfaces so as to improve interoperability among different AOP implementations.
+
+27) What is called spring configuration file?
+
+Spring configuration file is an XML file and it contains class information. It also describes how these classes are configured and interact with each other.
+
+28) What are different types of Autowire?
+
+There are four different types of Auto wire:
+
+    byName
+    byType
+    constructor
+    autodetect
+
+29) What are the types of the transaction management that is supported by spring?
+
+Following are the types of transaction management that has been supported by spring:
+
+    declarative
+    programmatically
+
+30) When are declarative and programmatic transaction management used?
+
+When only a small amount of transactional operations is there, it is advised to use Programmatic transaction management. But if there is a big amount of transactional operations to be taken care of, declarative transaction management is preferred.
+
+31) What is IOC?
+
+IOC (Inversion of Control pattern) is also known as dependency injection. IOC directs the programmers to depict how to create objects instead of actually creating them. But in this design pattern, this control has been given to assembler and assembler will instantiate required class if needed.
+
+32) Write about the different types of Listener related events?
+
+The different types of events related to listeners are:
+
+    ContextRefreshedEvent – This gets called when the context is refreshed or initialized.
+    RequestHandledEvent – This gets called when the web context is handling a request.
+    ContextClosedEvent – This gets called when the context gets closed.
+
+33) What is an Aspect?
+
+Aspect is also called as logging which is required throughout the application. Logging or aspect is a cross cutting functionality in an application using AOP.
+
+34) What is a Joinpoint?
+
+The point where an aspect can be introduced in the application is known as a joinpoint. This point could be a field being modified, a method being called or even an exception being thrown. At these points, the new aspect’s code can be added to introduce a new behavior to the application.
+
+Aspect code can be inserted at this point into normal flow of application to change the current behavior.
+
+35) What is called an Advice?
+
+Advice will tell application on new behavior and it is the implementation of an aspect. It is inserted into an application at the joinpoint.
+
+Advice is the implementation of an aspect. It is something like telling your application of a new behavior. Generally, the advice is inserted into an application at joinpoints.
+
+36) What is a Pointcut?
+
+Pointcut is used to allow where the advice can be applied.
+
+37) What is weaving?
+
+Weaving is used to create new proxy object by applying aspects to target object.
+
+38) What is difference between singleton and prototype bean?
+
+Singleton Bean – Single bean definition to a single object instance per Spring IOC container
+
+Prototype Bean – Single bean definition to any number of object instances per Spring IOC Container
+
+39) In what points, can weaving be applied?
+
+Following are the points where weaving can be applied:
+
+    Compile Time
+    Class load Time
+    Runtime
+
+40) What are the different types of AutoProxying?
+
+Following are the different types of AutoProxying:
+
+    BeanNameAutoProxyCreator
+    DefaultAdvisorAutoProxyCreator
+    Metadata autoproxying
+
+41) How can beans be made singleton or prototype?
+
+The bean tag has an attribute called ‘singleton’. The bean is singleton if its value is ‘TRUE’, otherwise the bean is a prototype.
+
+42) What classes are used to Control the database connection?
+
+Following are the classes that are used to control database connection:
+
+    Data Source Utils
+    SmartData Source
+    AbstractData Source
+    SingleConnection DataSource
+    DriverManager DataSource
+    TransactionAware DataSourceProxy
+    DataSource  TransactionManager
+
+43) Describe about DAO in Spring framework?
+
+DAO is used to provide integration of Java database connectivity and Object relational mapping objects. DAO is spring framework provides connection for JDBC, hibernate, JDO, JPA, Common client interface and Oracle.
+
+44) What is Autoproxying?
+
+Autoproxying is used to create proxy automatically for the spring users. It provides following two classes to support this automatic proxy creation:
+
+    BeanNameAutoProxyCreator
+    DefaultAdvisorAutoProxyCreator
+
+45) What is Metadata Autoproxying?
+
+Metadata Autoproxying can be performed inspiring which can be driven by metadata. This is determined by source level attributes and keeps metadata inside the source code.
+
+This maintains metadata in one place and mainly used for declarative transaction support.
+
+46) What is ‘Throws advice’ in Spring?
+
+‘Throws Advice’ define the behavior when an exception occurs. It is an interface and it has no methods which need to be implemented.
+
+A class that implements this interface should have method with this signature:
+
+    Void samplethrow (Throw table t)
+    Void samplethrow(Method m, Object[] o, Object target, Throw tablet)
+
+47) What are the various editors used in spring work?
+
+The various custom editors provided by the Spring Framework are:
+
+    PropertyEditor
+    URLEditor
+    ClassEditor
+    CustomDateEditor
+    FileEditor
+    LocaleEditor
+    StringArrayPropertyEditor
+    StringTrimmerEditor
+
+48)  What are the advantages of spring framework?
+
+Following are the advantages of spring framework:
+
+    Layered Architecture
+    Enables Plain Old Java Object (POJO) Programming and it enables continuous integration and testability
+    Dependency Injection and Inversion of Control that simplifies JDBC
+    Open source framework which can be used for commercial purpose
+
+49) How is Hibernate accessed using the Spring framework?
+
+Hibernate can be accessed in the following two ways:
+
+     By IOC with a Callback and HibernateTemplate.
+     By applying an AOP Interceptor and broadening the HibernateDaoSupport.
+
+50) What are the various Channels supported by Spring 2.0?
+
+Following are the channels supported by spring version 2.0:
+
+    Pollable Channel
+    Subscribable Channel
+    PublishSubscribe Channel
+    Queue Channel
+    Priority Channel
+    Rendezvous Channel
+    Direct Channel
+    Executor Channel
+    Scoped Channel
+
+51) Why is declarative transaction management preferred in Spring?
+
+Declarative transaction management has minimum impact on the application code and, therefore, is an idealistic lightweight container.
+
+52) Explain the concept of a BeanFactory?
+
+BeanFactory applies the idea of a factory pattern that utilizes IOC to separate the application’s dependencies and configuration from the actual code.
+
+53) What are the different scopes of spring bean?
+
+Scopes of spring bean are Singleton, prototype, request, session and global session.
+
+54) What are all the ways to access Hibernate by using Spring? 
+
+There are two ways to access hibernate using spring:
+
+    Inversion of Control with a Hibernate Template and Callback
+    Extending HibernateDAOSupport and Applying an AOP Interceptor node.
+
+55) How struts application can be integrated with spring? 
+
+There are two options for struts application that can be integrated with spring:
+
+Configuration of Spring to manage beans using ContextLoader plugin and set their dependencies in a spring context file
+
+Grab spring managed beans explicitly using agetwebapplicationcontext()
+
+56) What is Inversion of control (IOC)?
+
+Inversion of Control (IOC) is also called as dependency Injection which is nothingbut a design pattern that gives control to the assembler of classes. In general, class will instantiate another class if required.
+
+But in this design pattern, this control has been to given to assembler and assembler will instantiate required class if needed.
+
+57) Write the benefits of using IOC?
+
+The major benefits of dependency injection or IOC are that it reduces the amount of coding required for the application. This allows the testing of the application to be done quickly and easily as no JNDI lookup mechanism or singletons are required. IOC containers also support lazy loading and eager installation of services.
+
+58) What is Inner bean? What is the drawback of inner bean?
+
+If a bean element is directly embedded in a property tag while wiring beans, then the bean is called Inner Bean. Its drawback is that it cannot be reprocessed.
+
+59)What are the different types of Injection in spring?
+
+There are three types of Injection in spring:
+
+    Setter Injection
+    Constructor Injection
+    Getter or Method Injection
+
+60) What are the benefits of spring framework?
+
+Following are the benefits of spring framework:
+
+    Light weight container when compared to j2EE containers
+    Built in Web MVC framework
+    Creates loosely coupled applications
+    Supports aspect oriented programming like logging, transaction and security
+    Configuration done in XML format which is easy to write and understand
+
+61) What are the types of Advice?
+
+There are five types of Advice:
+
+    Before Advice
+    After returning advice
+    After throwing advice
+    Finally advice
+    Around advice
+
+62) What is called PreparedStatementCreator?
+
+PreparedStatementCreator is one of the most commonly used interfaces for writing data to the database. createPreparedStatement() is a method that can be used to create and return PreparedStatement from the Connection argument, and exception handling is automatically taken care of. When this interface is implemented, a different interface SqlProvider can also be implemented which has a method called getSql(). This method is useful for providing sql strings to the JdbcTemplate. It does not handle SQLExceptions.
+
+63) What is SQLProvider?
+
+SQLProvider has only one method called getSql()and it is implemented using PreparedStatementCreator implementers. It is mainly used for debugging.
+
+64) Write about BatchPreparedStatementSetter?
+
+BatchPreparedStatementSetter is used to update more than a single row in one go, they can use BatchPreparedStatementSetter. This interface provides two methods they are
+
+    setValues( PreparedStatement ps, int i) throws SOL exception
+    int getBatchSize
+
+65) What is the better method of using JDBC in Spring?
+
+If JDBC is used with the template class called JdbcTemplate, it gives a better performance.
+
+66) What exceptions do the DAO classes, use in Spring throw?
+
+In spring DAO classes only throws SQLException.
+
+67) Explain the advantages of using DAO module?
+
+The database code can be kept clean and simple by using the DAO module. This helps in preventing problems that rise because of poor handling of closures of database resources. Also, the DAO module utilizes the AOP module to enable objects in the Spring application to use transaction management services.
+
+68) Name the significant ApplicationContext implementations used in the spring framework?
+
+They are:
+
+     ClassPathXmlApplicationContext
+     FileSystemXmlApplicationContext
+     XmlWebApplicationContext
+
+69) How is a bean added to a Spring application?
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN">
+<beans>
+<bean id="foo"/>
+<bean id="bar"/>
+</beans>
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+	
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN">
+ 
+<beans>
+ 
+<bean id="foo"/>
+ 
+<bean id="bar"/>
+ 
+</beans>
+
+The bean tag has an ID attribute which stores the bean name and a class attributes which specifies the full class name.
+
+70) What are ORM integration modules?
+
+Object/relational mapping (ORM) tool is supported by Spring over straight JDBC by implementing the ORM module. Spring can join various important ORM frameworks, including JDO, iBATIS SQL Maps and Hibernate.
+
+71) Mention and explain the types of Advice in Spring?
+
+Types of advice are:
+
+     Before advice: Advice that is executed prior to a joinpoint is called the ‘before advice’.
+     After returning advice: Advice that is executed after the normal completion of a joinpoint is called the ‘after returning advice’.
+     After throwing advice: Advice that is executed only if a method exits abnormally by throwing an exception, is called the ‘after throwing advice’.
+     After (finally) advice: Advice that is executed irrespective of how a joinpoint exits is called ‘after finally advice’.
+     Around advice: Advice that borders a joinpoint, for example, a method invocation, is called an ‘around advice’. This can be used to perform special activities before and after the invocation of method.
+
+72) What is the web module?
+
+The web module enables the creation of a web application without XML. The web.xml file needs to be configured for using the web module.
+
+73) What is DataAccessException?
+
+DataAccessException is a RuntimeException. It is an Unchecked Exception. The user cannot be forced to handle these kinds of exceptions.
+
+74) What is XMLBeanFactory?
+
+Spring includes several applications of Bean factory. Out of these, org.springframework.beans.factory.xml.XmlBeanFactory is a very important one. It loads the beans on the basis of the definitions stored in an XML file. For the creation of an XmlBeanFactory, a java.io.InputStream is passed to the constructor. The InputStream provides the XML to the factory. For example, for retrieval of the bean, the getBean() method is called by passing the name of the desired bean.
+MyBean helloBean = (MyBean) factory.getBean("helloBean");
+1
+	
+MyBean helloBean = (MyBean) factory.getBean("helloBean");
+
+75) Name the Exception class which is connected to the exceptions thrown by the applications?
+
+It is the DataAccessException given by org.springframework.dao.DataAccessException
+
+76) Mention the types of lOC (dependency injection)?
+
+The different types of loC are: –
+
+     Setter Injection: With the help of JavaBeans properties.
+     Constructor Injection: Dependencies are given in the form of constructor parameters.
+     Interface Injection: With the help of an interface, an Injection is performed.
+
+Out of these three, only construction and setter are being used in Spring.
+
+77) What are the important beans lifecycle methods?
+
+All in all, two bean lifecycle methods are there. The first method is the setup method which is called during the loading of the bean into the container. The second is when the bean is unloaded from the container, and this method is called the teardown.
+
+78) How can the default lifecycle methods of beans be nullified?
+
+The tag, bean, has two useful attributes which can be used to define special initialization and destruction methods.
+
+For Example, two new methods forSetup and forTeardown can be added to the Foo class in the following way:
+<beans>
+<bean id="bar" init-method=”forSetup” destroy=”forTeardown”/>
+</beans>
+1
+2
+3
+4
+5
+	
+<beans>
+ 
+<bean id="bar" init-method=”forSetup” destroy=”forTeardown”/>
+ 
+</beans>
+
+79) What is a Target?
+
+A target is the class that is advised. This class can either be a class to which we want to add a special behavior to or a third party class. The target class is free to center on its major concern using the AOP concepts, regardless of any advice that is being applied.
+
+80) Explain the term Proxy?
+
+The term proxy refers to an object which is produced the application of an advice to the target object.
+
+81) What is cross cutting concern and concern in spring AOP?
+
+Cross cutting concern:  It is a concern which is applicable throughout the application and it affects the       entire application. E.g Security, logging and data transfer are the concerns which are needed in almost every module of an application.
+
+Concern: Concern is a behavior that we want to have in a module of an application. Issues in which we are interested defines our concern.

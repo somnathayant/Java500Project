@@ -1,0 +1,477 @@
+
+    What would happen if we have a prototype bean injected into a singleton bean ? How many objects of prototype bean object will be created ?
+    When a singleton bean is created , a single instance of the prototype bean objecte is created. It won't create a new prototype bean.
+
+   
+    A bean can be marked abstract by abstract=true, does not that mean we have to make the corresponding java class abstract ?
+
+    No, a bean marked abstract makes the bean not instanciatable, also it makes an ideal situation to use this reference as parent to other child bean definition. Making the corresponding java as abstract is not necessary but can be done
+    If an inner bean is defined with an id, can you use this id to fetch the bean from the container ?
+
+    No, An bean defined inner bean can't be accessed even if the id attribute has value. so getBean("theInnerId") will fail with NoSuchBeanDefinitionException.
+
+    What is the implementation of List is used when you use the <list> tag in a bean definition ?
+    How do you use a particular implementation of collection in your bean definition ?
+
+    You can use the <util:set> <util:list> and <util:map> with set-class to the implementation you want to use.For example <util:list set-class="java.util.LinkedList"> to use linkedList as implementation, and don't forget to include the schema details in the beans tag. Also util tag can let you create id of the collection , thus this can be refered or shared with any other beans by using the regular way , ie the ref tag.
+
+     
+
+
+========================================================================================================================
+
+
+What is Aspect Oriented Programming (AOP)?
+- Basically Aspect oriented programming complements object oriented programming by providing another way of programming model structure.
+- In addition to classes, AOP gives you aspect, which enables modularization of concerns such as Transaction management or logging and can be separated out from the application business logic of the code (these kinds of concerns are termed as crosscutting concerns). AOP supports separating application business logic from System services.
+What is IOC or Dependency Injection?
+- The basic concept of IOC (Dependency of Injection) is that you do not create your objects but describe how they should be created.
+- You don’t directly connect your component and services together in code but describe which services are needed by which component in configuration file.
+- You just need to describe the dependency, the Spring container is then responsible for hooking it all up.
+When to use Dependency Injections?
+There are different scenarios where you Dependency Injections are useful.
+
+- You need to inject configuration data into one or more component.
+- You need to inject the same dependency into multiple components.
+- You need to inject different implementation of the same dependency.
+- You need to inject the same implementation in different configuration.
+- You need some of the services provided by container.
+When you should not use Dependency Injection?
+There were scenarios where you don’t need dependency injections e.g.
+- You will never need a different implementation.
+- You will never need different configurations.
+What is Bean Factory in Spring?
+- A Bean Factory is like a factory class that contains collections of beans. The Bean Factory holds bean definition of multiple beans within itself and then instantiates the bean when asked by client.
+- Bean Factory is actual representation of the Spring IOC container that is responsible for containing and managing the configured beans.
+Different Spring Bean Scope.
+1. singleton : Return a single bean instance per Spring IOC container.
+2. prototype : Return a new bean instance each time when requested.
+3. request : Return a single bean instance per HTTP request.
+4. session : Return a single bean instance per HTTP session.
+5. global session : Return a single bean instance per global HTTP session and only valid when used in portlet context.
+How you will decide when to use prototype scope and when singleton scope bean?
+- You should use the prototype scope for all beans that are stateful and the singleton scope should be used for stateless beans.
+What are the different types of IOC?
+There are three types of dependency Injection:
+
+1. Constructor Injection :
+
+- Dependencies are provided as a constructor parameter.
+
+- Example : You want to inject some object say 'Foo' through constructor in class 'HellowWorld' like below.
+public class HelloWorld
+{
+public HelloWorld(Foo foo)
+   {
+       this.foo = foo;
+   }
+}
+
+- In configuration file you need to do following entry.
+<bean id="helloWorldBean" class="com.xyz.services.HelloWorld">
+<constructor-arg ref="fooBean" />
+</bean>
+<bean id="fooBean" class="com.xyz.service.Foo">
+</bean>
+
+2. Setter Injection :
+
+- Dependencies are assigned through setter method.
+
+- Example : Same example as above.
+public class HelloWorld
+{
+private Foo fooBean;
+public HelloWorld(){ }
+public void setFooBean(Foo fooBean)
+{
+   this.fooBean=fooBean;
+}
+
+- And in configuration file you need to do following entry.
+<bean id="helloWorldBean" class=" com.xyz.services.HelloWorld">
+<property name=fooBean ref="fooBean" />
+</bean>
+<bean id="fooBean" class="com.xyz.service.Foo">
+</bean>
+
+3. Interface Injection :
+
+Injection is done through an interface and not supported in spring framework.
+How to Call Stored procedure in Spring Framework?
+- To call a Stored procedure in Spring framework you need to create Class which will should extends StoredProcedure class.
+- Take the example of getting Employee Details by Employee Id. package com.mytest.spring.storeproc
+import java.sql.ResultSet;
+import java.sql.Types;
+import java.util.HashMap;
+import java.util.Map;
+import javax.sql.DataSource;
+import org.springframework.jdbc.core.SqlOutParameter;
+import org.springframework.jdbc.core.SqlParameter;
+import org.springframework.jdbc.object.StoredProcedure;
+public class EmployeeInfo extends StoredProcedure
+{
+   private static final String EMP_ID = "EMP_ID";
+   private static final String EMP_NAME = "EMP_NAME";
+   private static final String JOIN_DATE = "JOIN_DATE";
+   public SnapshotSearchStoredProcedure(DataSource dataSource, String procedureName)
+   {
+       super(dataSource, procedureName);
+       declareParameter(new SqlParameter(EMP_ID, Types.NUMERIC));
+       declareParameter(new SqlOutParameter(EMP_NAME, Types.VARCHAR));
+       declareParameter(new SqlOutParameter(JOIN_DATE, Types.VARCHAR));
+       compile ();
+   }
+   public Map execute(Integer empId)
+   {
+       Map<String, Object> inputs = new HashMap<String, Object>();
+       inputs.put(P_CLD_IDR, empId);
+       Map<String, Object> result = execute (inputs);
+       return result;
+   }
+}
+- You just need to call the execute method from the DAO layer.
+Differentiate between BeanFactory and ApplicationContext in spring.
+- With ApplicationContext more than one config files are possible while only one config file or .xml file is possible with BeanFactory.
+- ApplicationContext publishes events to beans that are registered as listeners while BeanFactory doesn't support this
+- ApplicationContext support internationalization messages, application life-cycle events, validation and many enterprise services like JNDI access, EJB integration, remoting etc. while BeanFactory doesn't support any of these.
+What is the difference between singleton and prototype bean?
+Mainly it is the scope of a beans which defines their existence on the application
+Singleton : It means single bean definition to a single object instance per Spring IOC container.
+Prototype : It means a single bean definition to any number of object instances.
+How do beans become 'singleton' or prototype?
+- There exists an attribute in bean tag, called 'singleton’.
+- If it is marked 'true', the bean becomes 'singleton'.
+- If it is marked 'false', the bean becomes 'prototype'.
+What type of transaction Management Spring support?
+Spring supports two types of transaction management:
+
+1. Programmatic transaction management
+2. Declarative transaction management.
+When do you use programmatic and declarative transaction management?
+- Programmatic transaction management is used preferably when you have a small number of transactional operations.
+- Incase of large number of transactional operations it is better to use declarative transaction management.
+What is IOC?
+- IOC stands for Inversion of Control pattern.
+- It is also called as dependency injection.
+- This concept says that you do not create your objects but describe how they should be created.
+- Similarly, you do not directly connect your components and services together in code but describe which services are needed by which components in a configuration file.
+- A container then hooks them all up.
+What are the different types of IoC (dependency injection)?
+- There are three types of dependency injection:
+1. Constructor Injection : Here dependencies are provided as constructor parameters.
+2. Setter Injection : Dependencies are assigned through JavaBeans properties.
+3. Interface Injection : Injection is performed through an interface.
+- Spring supports only first two categories of Injection.
+What are the benefits of IOC?
+The main benefits of IOC or dependency injections are :
+1. It minimizes the amount of code in your application.
+2. It makes your application easy to test as it doesn't require any singletons or JNDI lookup mechanisms in your unit test cases.
+3. Loose coupling is promoted with minimal effort and least intrusive mechanism.
+4. IOC containers support eager instantiation and lazy loading of services.
+What is Bean Wiring?
+- Bean wiring means creating associations between application components i.e. beans within the spring container.
+How do you access Hibernate using Spring ?
+There are two ways to Spring’s Hibernate integration:
+1. By Inversion of Control with a HibernateTemplate and Callback.
+2. By extending HibernateDaoSupport and Applying an AOP Interceptor.
+How would you integrate Spring and Hibernate using HibernateDaoSupport?
+This can be done through Spring’s SessionFactory called LocalSessionFactory. The steps in integration process are:
+1. Configure the Hibernate SessionFactory.
+2. Extend your DAO Implementation from HibernateDaoSupport.
+3. Wire in Transaction Support with AOP.
+What are the various transaction manager implementations in Spring?
+1. DataSourceTransactionManager : PlatformTransactionManager implementation for single JDBC data sources.
+2. HibernateTransactionManager: PlatformTransactionManager implementation for single Hibernate session factories.
+3. JdoTransactionManager : PlatformTransactionManager implementation for single JDO persistence manager factories.
+4. JtaTransactionManager : PlatformTransactionManager implementation for JTA, i.e. J2EE container transactions.
+What are the different modules in spring framework?
+The Spring features or organized into about 20 modules. These modules are grouped into Core Container, Data Access/Integration, Web, AOP (Aspect Oriented Programming), Instrumentation and Test, as depicted below.
+
+What is Auto Wiring in Spring?
+- The Auto-wiring in spring framework can be performed by configuring in xml and Spring Auto-Wiring with Annotation @Autowired.
+
+- Auto-wiring beans with xml configuration: In Spring framework, you can wire beans automatically with auto-wiring feature. To enable auto-wiring just define the “autowire” attribute in <bean> tag.
+
+<bean id="customer" class="com.test.autowire.Customer" autowire="byName" />
+
+- There are five modes of Auto-wiring supported.
+
+1. no – Default, no auto wiring, set it manually via “ref” attribute.
+<bean id="customer" class="com.test.autowire.Customer">
+<property name="person" ref="person" />
+</bean>
+<bean id="person" class="com.test.autowire.Person" />
+2. byName – Auto wiring by property name. If the name of a bean is same as the name of other bean property, auto wire it.
+
+- In below example the name of the person bean is same as name of “customer” bean’s property Person object. So spring will auto-wire it via setter method.
+<bean id="customer" class="com.test.autowire.Customer" autowire="byName"/>
+<bean id="person" class="com.test.autowire.Person" />
+3. byType – Auto wiring by property data type. If data type of a bean is compatible with the data type of other bean property, auto wire it.
+
+- In below example the data type of the person bean is same as name of “customer” bean’s property Person object. So spring will auto-wire it via setter method.
+<bean id="customer" class="com.test.autowire.Customer" autowire="byType"/>
+<bean id="person" class="com.test.autowire.Person" />
+4. constructor – byType mode in constructor argument.
+
+- Here the data type of “person” bean is same as the constructor argument data type in “customer” bean’s property (Person object), so, Spring auto wired it via constructor method – “public Customer(Person person)”
+<bean id="customer" class="com.test.autowire.Customer" autowire="constructor"/>
+<bean id="person" class="com.test.autowire.Person" />
+5. autodetect – If a default constructor is found, use “autowired by constructor”; Otherwise, use “autowire by type”.
+
+- If a default constructor is found, uses “constructor”; Otherwise, uses “byType”. In this case, since there is a default constructor in “Customer” class, so, Spring auto wired it via constructor method – “public Customer(Person person)”.
+<bean id="customer" class="com.test.autowire.Customer" autowire="autodetect"/>
+<bean id="person" class="com.test.autowire.Person" />
+What is JdbcTemplate in Spring? And how to use it?
+The JdbcTemplate class is the main class of the JDBC Core package. The JdbcTemplate (The class internally use JDBC API) helps to eliminate lot of code you write with simple JDBC API (Creating connection, closing connection, releasing resources, handling JDB Exceptions, handle transaction etc.). The JdbcTemplate handles the creation and release of resources, which helps you to avoid common error like forgetting to close connection.
+
+- Examples :
+
+1. Getting row count from database.
+int rowCount = this.jdbcTemplate.queryForObject("select count(*) from t_employee", int.class);
+2. Querying for a String.
+String lastName = this.jdbcTemplate.queryForObject( "select last_name from t_employee where Emp_Id = ?", new Object[]{377604L}, String.class);
+3. Querying for Object
+Employee employee = this.jdbcTemplate.queryForObject( "select first_name, last_name from t_employee where Emp_Id = ?", new Object[]{3778604L}, new RowMapper()
+{
+public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
+Employee employee = new Employee();
+employee.setFirstName(rs.getString("first_name"));
+employee.setLastName(rs.getString("last_name"));
+return employee;
+}
+});
+4. Querying for N number of objects.
+List<Employee> employeeList = this.jdbcTemplate.query("select first_name, last_name from t_employee", new RowMapper<Employee>() {
+public Employee mapRow(ResultSet rs, int rowNum) throws SQLException
+{
+   Employee employee = new Employee();
+   employee.setFirstName(rs.getString("first_name"));
+   employee.setLastName(rs.getString("last_name"));
+   return employee;
+}
+});
+What NamedParameterJdbcTemplate in Spring?
+The NamedParameterJdbcTemplate allow basic set of JDBC operations, it allows named parameter in the query instead of traditional (?) placeholder, the functionality is similar to JdbcTemplate class.
+
+- Example :
+NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+String empInsrtQuery = "INSERT INTO Employee (name, age, salary) VALUES (:name, :age, :salary)";
+Map namedParameters = new HashMap();
+namedParameters.put("name", name);
+namedParameters.put("age", age);
+namedParameters.put("salary", salary);
+namedParameterJdbcTemplate.update(empInsrtQuery, namedParameters);
+What are Advice, Aspect, Join-point and point cut in spring?
+Advice :
+An advice is an action taken by the aspect at particular join-point is called Advice.
+
+Aspect :
+An aspect is a subprogram which is associated with specific property of a program (Example separating logging code from the main program). An aspect is functionality or feature that cross cuts over object. AOP increase modularity of a program.
+
+Join-Point :
+A join point is a point used in spring AOP framework to represent a method execution. It always point during execution of program, method or exception. A join point is basically an opportunity within the code to apply aspect.
+
+Point Cut :
+In AOP a point cut is a set of many join points where an advice can execute. A chunk of code (known as Advice) associated with join point get executed.
+What are the different types of Advice?
+There are different types of Advice.
+
+Before Advice :
+The advice which executed before a join point called before advice. The before advice does not have the ability to prevent the execution flow proceeding at the join point (unless it throws an exception).
+
+After Return Advice :
+The advice which executed after a join point completed normally without any exception.
+
+Around Advice :
+It is responsible for choosing whether to proceeds to the join point or shortcut the advised method execution by returning its own return value or throwing an exception. This is most powerful kind of advice. With Around advice you can perform custom behavior before and after method execution.
+
+After Throwing Advice :
+The advice executed when a method throws an exception.
+
+After (finally) Advice :
+The advice is executed when program exits the join points either normally or by throwing an exception.
+What is Weaving in Spring?
+Weaving is the process of linking aspect with other application types or object to create an advised object. This can be performed at compile time, runtime and load time. In spring framework weaving is performed at runtime.
+What is AOP Proxy?
+AOP proxy is an object to implement the aspect contracts (advice method executions and so on). The AOP proxy is object is created by the AOP framework. In spring framework AOP proxy is JDK dynamic proxy or CGLIB proxy.
+What is front controller in Spring MVC?
+The Front Controller is basically a type of Design pattern which are being implemented in different framework (e.g. Struts and Spring MVC etc.).
+- In Spring MVC DispatcherServlet act as a Front Controller for the framework and responsible for intercepting every request and then dispatches/forwards request to appropriate controller. Configure the DispatcherServlet in the web.xml file of web application and request which we want to be handled by DispatcherServlet should be mapped using URL mapping.
+- For example all the requests ending with *.do will be handled by the DispatcherServlet.
+<web-app>
+<servlet>
+<servlet-name>example</servlet-name>
+<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+<load-on-startup>1</load-on-startup>
+</servlet>
+<servlet-mapping>
+<servlet-name>example</servlet-name>
+<url-pattern>*.do</url-pattern>
+</servlet-mapping>
+</web-app>
+Difference between FileSystemResource and ClassPathResource.
+- In FileSystemResource you need to give the configuration file (i.e. spring-config.xml) relative to your project or the absolute location of the file.
+
+- In ClassPathResource spring looks for the file in the ClassPath so configuration (i.e. spring-config.xml) file should be included in the classpath. If spring-config.xml is in classpath, you can simply give the name of the file.
+
+- For Example: If your configuration file is at src/main/java/com/test/loadresource then your FileSystemResource would be:
+FileSystemResource resource = new FileSystemResource("src/main/java/com/test/loadresource/spring-config.xml");
+And ClassPathResource would be :
+ClassPathResource resource = new ClassPathResource("com/test/loadresource /spring-config.xml");
+What is inner Bean Definition?
+- A bean definition added inside the property or constructor-arg elements are called inner bean.
+
+- Example :
+<bean id="outerbean" class="...">
+<!-- instead of using a reference to a target bean, simply define the target bean inline -->
+<property name="targetbean">
+<bean class="com.example.Person"> <!-- this is the inner bean -->
+<property name="name" value="XYZ"/>
+<property name="age" value="35"/>
+</bean>
+</property>
+</bean>
+Give examples of how spring platform can be used by an application developer.
+The spring platform can be used by an application developer in the following way :
+- Java method can be made to execute in a database transaction without having to deal with transaction APIs.
+- Local Java method can be made a remote procedure without having to deal with remote APIs.
+- Local Java method can be made a management operation without having to deal with JMX APIs.
+- Local Java method can be made a message handler without having to deal with JMS APIs.
+What are the various ways of using spring?
+- There are various ways and forms in which springs can be used.
+- They are listed as follows:
+1. Full-fledged Spring web app.
+2. Spring middle-tier provides help of a third-party web framework.
+3. Remote usage scenario: allow the system to be used to remotely use the resources from the server. The remote usage can be done to grab the data from the server or for troubleshooting the environment.
+4. EJB -- Wrapping existing POJOs.
+Specify the locations where spring can publish its artifacts.
+Spring generally publishes its artifacts to four different places:
+1. Community download site http://www.springsource.org/downloads/community.
+2. Maven Central, which is considered the default repository that Maven queries, and does not require any special configuration to use.
+3. The Enterprise Bundle Repository (EBR), which is considered to be run by SpringSource and also hosts all the libraries that integrate with Spring.
+4. Public Maven repository hosted on Amazon S3 for the development of snapshots and milestone releases. The jar file names are given in the same form as Maven Central, which makes it a useful place to get development versions of Spring to use with other libraries Spring Framework deployed in Maven Central.
+What are the features of the new spring build system in use now days?
+Now the new Spring build system is used which comes with the following features :
+1. "Spring Built" system which is based on Ivy.
+2. consistent procedure for deployment.
+3. dependency management which is made consistent.
+4. consistent generation for OSGi.
+List in brief the new features Spring 3.0 has to offer.
+Spring 3.0 offers the following new features:
+1. Spring Expression Language.
+2. IoC enhancements or Java based bean metadata.
+3. field formatting and General-purpose type conversion system.
+4. Object to XML mapping functionality (OXM) moved from Spring Web Services project.
+5. Comprehensive REST support.
+6. @MVC additions.
+7. Declarative model validation.
+8. Early support for Java EE 6.
+9. Embedded database support.
+What are the annotations supported by the spring framework?
+Due to addition of some core features from the JavaConfig project to the Spring Framework,the following annotations are now directly supported :
+- @Configuration
+- @Bean
+- @DependsOn
+- @Primary
+- @Lazy
+- @Import
+- @ImportResource
+- @Value
+Explain in brief the metadata contained in the BeanDefinition objects.
+Bean definitions contain the following metadata:
+1. A package-qualified class name: which is the actual implementation class of the bean being defined.
+2. Bean behavioral configuration elements, which state the procedure for how the bean should behave in the container
+3. References to other beans that are required for the bean to do its work; these references are also called collaborators or dependencies.
+4. Other configuration settings to set when a new object is created, for example, the number of connections to use in a bean that manages a connection pool or the size limit of the pool.
+What are the different properties the metadata translates into to make up the bean definition?
+Metadata translates into the following properties to make up:
+1. Property defined in class the section called “Instantiating beans”.
+2. Property defined in name the section called “Naming beans” scope constructor arguments the section known as “Dependency injection”.
+3. Properties the section known as “Dependency injection” auto wiring mode the section known as “Autowiring collaborators”.
+4. lazy-initialization mode the section called “Lazy-initialized beans”.
+5. Initialization method the section called “Initialization callbacks”.
+6. Destruction method the section called “Destruction callbacks”.
+Briefly describe the 2 ways in which the class property can be used.
+The class property can be put to use in the following ways:
+1. It is used to specify the java bean for class to be constructed when container directly creates java bean by calling constructor reflectively. This procedure is also used for java code which uses a new operator.
+2. It is also used to specify the class which contains static factory method which is invoked for creating object. Another case in this which doesn’t occur much is when static factory method is invoked by container on a class for creating the bean.
+Explain the dependency resolution process.
+The dependency resolution process is carried out as follows:
+1. Creation an initialization of application text inside configuration metadata( can be specified in XML, java code,annotations) is done. This describes all the beans.
+2. For each bean, its dependency is expressed in the form of properties, constructor arguments, or
+arguments to the static-factory method if that is used instead of a normal constructor.
+3. Each property or constructor argument is actual definition of the value which belong to set, or a reference to another bean which is in the container.
+4. Each property or constructor argument which is a value is gone through conversion from its specified format to the actual type of that property or constructor argument.
+How can you use spring to resolve collaborators for your bean? Also state the advantages of auto wiring?
+- The spring can be used to resolve collaborators automatically by inspecting contents of the ApplicationContext.
+- The Autowiring has the following advantages in spring:
+1. Reduces requirement for specifying properties or construction arguments.
+2. Updates configuration while evolving of objects. To understand this lets consider an example: modifying would not be required in configuration of a dependency while adding it to a class.
+3. Switching to explicit wiring when code base is stable can be neglected.
+List the limitations of auto wiring.
+Autowiring has the following limitations :
+1. Overriding and auto wiring are caused due to dependency in property and constructor argument setting.
+2. Less precise as compared to explicit wiring.
+3. Tools that generate documentation using a spring might not have access to wiring information.
+4. There is a possibility of clash between bean definitions and argument or method to be wired.
+5. The problem does not occur much in case of maps, arrays and collection and cannot be resolved randomly for dependencies which expect one value.
+In scenarios where you have to avoid using auto wiring, what are the other options that can be explored to achieve the same?
+In scenarios where using autowiring is prohibited, the following replacements can achive the same :
+1. Abandon autowiring for favor of explicit wiring.
+2. Avoid autowiring for a bean definition by setting the autowire-candidate for attributes to false as described in the next section.
+3. Set a single bean definition as the primary candidate by setting the primary attribute of its <bean/> element to true.
+4. When Java 5 or later is used, implementation needs more fine-grained control available with annotation-based configuration.
+How do you call the multiple lifecycle mechanisms configured for the same bean?
+- Multiple lifecycle mechanisms which are configured for the same bean, with different initialization methods, are called by the following ways :
+1. Methods annotated with use of @PostConstruct.
+2. afterPropertiesSet() as stated by the InitializingBean callback interface.
+3. Custom configuration init() method
+- Destroy methods are called in the same order as follows :
+1. Methods annotated with the use of @PreDestroy.
+2. destroy() as stated by the DisposableBean callback interface.
+3. destroy() method with custom configuration.
+What are the methods associated with the FactoryBean interface?
+Following are the methods associated with factory bean interface:
+1. Object getObject() : This returns an instance of the object which the factory creates. This instance can possibly be shared, depending on the factory returns singletons or prototypes.
+2. Boolean isSingleton() : This returns true if this FactoryBean returns singletons, otherwise false.
+3. Class getObjectType() : This returns the object type returned by the getObject() method or null if the type is unknown in advance.
+What are the functionalities provided by the context package to enhance the BeanFactory functionality?
+The functionalities provided by context package are as follows:
+1. Message access in i18n-style, through the MessageSource interface.
+2. Resource access such as URLs and files, through which, the ResourceLoader interface, can be accessed and used.
+3. Publication of events, through the beans that allow, implementing the ApplicationListener interface. It is done through the use, of the ApplicationEventPublisher interface.
+4. Multiple loading contexts, allowing each to be focused on one particular layer, such as the web layer of an application, through the HierarchicalBeanFactory interface.
+How can you achieve Internationalization using MessageSource?
+Internationnalization using message source can be achieved by the following :
+1. String get Mesage(String code, Objct[] args, String default, Local loc) :
+The basic method used for retrieving a message from the MessageSource. When no message is to be found for the specified locale, the default message is used.
+
+2. String getMessage(String code, Objct[] args, Locale loc) :
+Essentially the same as the last method, but with a difference, no default message is specified; if the message cannot be found, a NoSuchMessageException is shown.
+
+3. String getMessage(MessageSourceResolvable resolvable, Local locale) :
+Properties used for the preceding methods are also wrapped in a class named MessageSourceResolvable, which you can use with this method.
+Enlist and explain the main methods associated with the Resource interface.
+Methods associated with resource interface are as follows:
+1. getInputStream() : It locates and opens the resource, returning an InputStream to read from the resource.
+2. exists() : Returns a boolean which indicates whether this resource actually exists in physical form.
+3. isOpen() : Returns a boolean which indicates whether this resource represents a handle with an open stream.
+4. getDescription() : Returns a description for this resource, which is used for error output when working with the resource.
+Give some examples where property editing is used in spring.
+Following are the examples for property editing in spring :
+1. Setting of properties on beans is done by using PropertyEditors. To mention java.lang.string as the value for a property of some bean you're declaring in XML file, Spring will use the ClassEditor to try resolving the parameter to a Class object.
+2. Passing HTTP request parameters in Spring's MVC framework can be done using all kinds of PropertyEditors that can be manually bind in all subclasses of the CommandController.
+Explain the main AOP concepts and terminology.
+The main AOP concepts are as follows:
+
+1. Aspect : A modularization of a concern that cuts through multiple classes.
+2. Join point : It is a point during which the execution of a programming, such as the execution of method or handling of an exception.
+3. Advice : An action taken by an aspect for a particular join point.
+4. Point cut : A predicate that is matched to join points.
+5. Introduction : Declaration of additional methods or fields on behalf of a type.
+6. Target object : Object which is advised by one or more aspects.
+7. AOP proxy : An object which is created by AOP framework for implementing the aspect contracts.
+8. Weaving : Linking of aspects with other application types or objects to create an advised object.
+

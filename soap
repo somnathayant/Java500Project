@@ -1,0 +1,176 @@
+1) Mention what is SOAP?
+
+SOAP means Simple Object Access Protocol is a type of communication protocol, a way to structure data prior to transmitting it and is based on XML standard.  It is developed to enable communication between applications of different platforms and programming language via internet.  It can use the range of protocols such as FTP, HTTP, SMTP, Post office protocol 3(POP3) to carry documents. In other words, it is an XML based protocol to transfer between computers.
+
+2) What are the elements of SOAP message structure?
+
+It is an ordinary XML document that contains the elements as a SOAP message
+
+    Envelope: It defines the start and end of the message
+    Header: It is an optional element. Contains information about the message being sent
+    Body: It contains the XML data comprising the message being sent
+    Fault: It provides the information about errors occurred while processing the message
+
+3) Mention what is the difference between SOAP and other remote access techniques?
+SOAP Webservice 	Other Remote Webservice
+
+    It is user-friendly, and it is non-symmetrical
+    It provides a platform with the language independence
+    SOAP uses HTTP protocol, and the data are saved in XML format
+    SOAP objects are stateless and hard to maintain
+
+ 
+	
+
+    Other web-services like DCOM or CORBA are more popular, but they are more complex
+    DCOM or CORBA does not provide any of these
+    Other remote services like CORBA and DCOM have their own binary formats that are used to transport the data in a complex manner
+    It is not hard to maintain
+
+4) Mention what is the difference between JSON and SOAP?
+
+JSON is standard to represent human readable data. SOAP is a protocol requirement for transmitting information and calling web-services using XML.
+
+5) Mention what is the major obstacle faced by the users using SOAP?
+
+The major obstacle faced by the users using SOAP is a firewall security mechanism.  This lock all the ports leaving few like HTTP port 80 and the HTTP port used by SOAP that bypasses the firewall. The technical complaints against SOAP is that it mixes the specification for message transport with the specification for message structure.
+
+soap-logo-simple_v2
+
+6) Mention what is the message format used in SOAP?
+
+Message format is written by using the XML language. The message format is standard, and it is widely used. The message format is like
+
+POST/InStock HTTP/1.1
+
+Host: localhost (www.xyz.org)
+
+Content Type: application/soap+xml; charset=utf-8
+
+Content length: 300
+
+SOAPAction:http://www.guru99.org/2003/05/soap-envelop>
+
+<?xml version= “1.0”?>
+
+<soap:Envelop xmlns:soap= http://www.guru99.org/2003/05/soap-envelop>
+
+<soap:Header>
+
+</soap:Header>
+
+<soap:Body>
+
+<m:CareerName>Guru99</m:CareerName>
+
+</soap:Body>
+
+</soap:Envelope>
+
+7) Mention what is the response format for SOAP response?
+
+SOAP response would be like
+
+HTTP/1.0 200 OK
+
+Content Type: text/xml; charset=utf-8
+
+Content-Length: nnn
+
+<?xml version= “1.0”?>
+
+<SOAP-ENV:Envelop
+
+xmlns: SOAP-ENV= http://www.guru99.org/2003/05/soap-envelope”
+
+SOAP-ENV: encoding style= http://www.guru99.org/2003/05/soap-encoding>
+
+<SOAP-ENV: Body xmlns:m=http://www.xyz.org/quotation”>
+
+<m:GetQuotationResponse>
+
+<m:Quotation > Here is the Quotation</m:Quotation>
+
+</m:QuotationRequest>
+
+</SOAP-ENV:Body>
+
+</SOAP-ENV: Envelope>
+
+8) Mention what is SOAP HTTP Binding?
+
+HTTP works over TCP/IP. The HTTP client links to an HTTP server using TCP. SOAP HTTP is a method that conforms with the SOAP encoding rules.
+
+HTTP + XML = SOAP
+
+A SOAP request could be an – HTTP GET request or HTTP POST
+
+The HTTP POST request mentions atleast two HTTP headers: Content-Type and Content-Length
+
+9) Mention what are the syntax rules for SOAP message?
+
+    SOAP message must use encoded XML
+    A SOAP envelope namespace must be used
+    A SOAP encoding namespace must be used
+    A SOAP message must not consist of a DTD reference
+    A SOAP message must not have XML processing instruction
+
+10) Mention what is the difference between SOAP web service and RESTful web service?
+
+    SOAP: In SOAP, communication between the client and web service happens using XML message. It specifies the communication rules like what are all the tags that should be used in XML and their meaning
+    RestFul: It uses architecture which use HTTP or similar protocols by restricting the interface to use standard operations like GET, PUT, POST, DELETE for HTTP.
+
+11) Mention the advantages of SOAP?
+
+Advantage of SOAP is that
+
+    It is a platform independent and language independent
+    SOAP de-couples the encoding and communications protocol from the runtime environment
+    Web service can obtain or receive a SOAP payload from a remote service, and the platform information of the source are entirely unrelated
+    Anything can generate an XML, from Perl scripts to C++ code to J2EE app servers
+    To send and receive messages it uses XML
+    It uses standard internet HTTP protocol
+    SOAP runs over HTTP; it eradicates firewall problems.  When using protocol  HTTP as the protocol binding, an RPC call maps automatically to an HTTP request and an RPC response maps to an HTTP response
+    Compared to RMI, CORBA and DCOM SOAP is very simple
+    A protocol for moving information in a distributed and decentralized environment
+    SOAP is the transport protocol independent and can be availed in co-ordination with a variety of protocols
+    It is the vendor neutral
+
+12) Explain how user use the facilities that are provided by SOAP?
+
+PutAddress(): It is used to  enter an address in the webpage.  It carries address instance on the SOAP call
+
+PutListing(): It is used to enable the insertion of a complete XML document into the webpage.  It receives the XML file as an argument and transport the XML file to XML parser liason, which reads it and puts it as a parameter in the SOAP call
+
+GetAddress(): It is used to determine a query name and retrieves the result that is best matched with a query.  In the form of text string, the name is sent to the SOAP call
+
+GetAllListing(): It is used to return the complete list in an XML format.
+
+13) Mention what is the transport method in SOAP?
+
+Application layer and transport layers of a network are used by SOAP. HTTP and SMTP are the valid application layer protocol used as transport for SOAP.  HTTP is more preferable as it works well with current internet infrastructure especially with firewalls.
+
+The SOAP requests can be sent via an HTTP GET method while the specification includes details on HTTP POST only.
+
+14) Mention what is the end point in web services?
+
+IP address of the server where the web services are running is the end point in web services.
+
+15) Explain what is SOAP envelop element?
+
+A SOAP envelop indicates the start and end of the message, so that the receiver knows when an entire message has been received.  In other words, a SOAP envelop is a packaging mechanism.
+
+16) List out important characteristics of a SOAP envelop element?
+
+The characteristic of SOAP element is
+
+    SOAP message has a root Envelope element
+    Envelope is a mandatory part of SOAP message
+    If an Envelope contains a header element, it should not contain more than one. Also, it should appear as the first child of the Envelope
+    When SOAP version changes envelop version also changes
+    SOAP envelope is specified by prefix ENV and Envelope element
+    The optional SOAP encoding is also specified using a namespace and the optional encodingstyle element
+
+17) Mention what is the difference between a web service and SOA?
+
+SOA is a software design principle and an architectural pattern for implementing loosely coupled, reusable and coarse grained services.  Using any protocols such as HTTP, HTTPS, JMS, SMTP, etc. you can implement SOA. The message can be in Data Transfer Objects or in XML.
